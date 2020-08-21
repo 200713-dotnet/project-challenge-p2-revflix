@@ -2,23 +2,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace RevFlix.Service.Controllers
 {
-  [Route("/movie/imdbi/{srch}")]
+  [Route("/movie/imdbi/{title}")]
   // [EnableCors("private")]  
   public class ImdbiController : ControllerBase
-    {
-  //   private readonly RevFlixDbContext _db;
-
-  //   public MovieController(RevFlixDbContext dbContext) // constructor dependency injection
-  //   {
-  //     _db = dbContext;
-  //   }
+  {
 
     [HttpGet]
-    public IActionResult Get(string srch)
+    public IActionResult Get(string title)
     {
-      var movies = new GetMovies();
+      var movies = new GetMoviesI();
       string message = null;
-      var list = movies.GetMoviesImdbI(srch, message);
+      var list = movies.ImdbI(title, message);
       if (message != null)
       {
         return Ok(message);
@@ -29,7 +23,7 @@ namespace RevFlix.Service.Controllers
         return Ok("Your search did not return any results.");
       }
       return Ok(list);
-      
+
       // return Ok($"RevFlix API service: You search for the movie '{srch}.'");
 
     }
