@@ -50,8 +50,7 @@ namespace RevFlix.Service
 
       app.UseSwaggerUI(c =>
       {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "V1");
-
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "RevFlix Movie API v1");
       });
 
 
