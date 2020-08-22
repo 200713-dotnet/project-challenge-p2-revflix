@@ -1,4 +1,6 @@
-﻿@{
+﻿@model RevFlix.Client.Models.SearchViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -7,4 +9,19 @@
     <p></p>
 </div>
 
- <a class="nav-link text-dark" asp-controller="Movie" asp-action="Index">Movies</a>
+@* <a class="nav-link text-dark" asp-controller="Movie" asp-action="Index">Movies</a> *@
+<form method="POST" asp-controller="Movie" asp-action="IndexSearch">
+    <div class="form-horizontal">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="text" id="movie" placeholder="Search Movies" name="userInput" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Search" class="btn btn-info" />
+            </div>
+        </div>
+    </div>
+</form>

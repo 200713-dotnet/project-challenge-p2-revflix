@@ -1,12 +1,12 @@
-namespace RevFlix.Client.Models
+namespace RevFlix.Service.Controllers.Models
 {
-  public class MovieIntModelBase
+  public class MovieImdbModelBase
   {
     public string Title { get; set; }
     // public int Year { get; set; }
     public string Imdb_id { get; set; }
 
-    public MovieIntModelBase()
+    public MovieImdbModelBase()
     {
 
     }
