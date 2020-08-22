@@ -1,0 +1,42 @@
+@* @model RevFlix.Client.Models.MovieViewModel
+
+<form action="/movie" method="get">
+<h1>RevFlix: Movie Search by Title Results<br/></h1>
+	@if (@Model.NumResults == 0)
+  {
+    <h2>Your search returned no results</h2>
+  }
+  else
+  {
+    <table class="table table-bordered table-responsive table-hover">
+			<thead>
+				<tr align="center">
+					<td><b>Title</b></td>
+					<td><b>Year Released</b></td>
+					<td><b>IMDB ID</b></td>
+  			</tr>
+			</thead><br/>
+			<tbody>
+        @foreach (var movie in @Model.MovieResults)
+        {
+          <tr>
+					<td value="@movie.Title">@movie.Title</td>
+          <td align="center" value="@movie.Year">@movie.Year</td>
+          <td align="center" value="@movie.Imdb_id">@movie.Imdb_id</td>
+					</tr>
+        }
+			</tbody>
+      <tfoot>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><b>No. of Results = @Model.NumResults</b></td>
+        </tr>
+      </tfoot>
+		</table>
+  <br/>
+  }
+
+  <button type="submit">< Back</button>
+  <br />
+</form> *@
