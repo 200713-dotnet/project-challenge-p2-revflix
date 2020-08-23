@@ -1,0 +1,50 @@
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2.3.1
+      - run: dotnet build
+
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2.3.1
+      - run: dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=opencover
+
+  analyze:
+    needs: [build, test] 
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2.3.1
+      - run: dotnet tool install --global dotnet-sonarscanner
+      - run: | 
+          dotnet sonarscanner begin -o:'rennerpa93' -k:'rennerpa93_RevFlix_P2' -d:sonar.login='d37178d6d45f2a5dbeb2f3df129c276b4945e0a0' -d:sonar.host.url='https://sonarcloud.io/'
+          dotnet build
+          dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=opencover --logger trx
+          dotnet sonarscanner end -d:sonar.login='d37178d6d45f2a5dbeb2f3df129c276b4945e0a0'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  packageservice:
+    env:
+      DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
+      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+    needs: [analyze]
+    runs-on: ubuntu-20.04
+    steps:
+        - uses: actions/checkout@v2.3.1
+        - run: echo ${DOCKER_TOKEN} | docker login --username ${DOCKER_LOGIN} --password-stdin
+        - run: docker image build -f RevFlix.Service/Dockerfile -t revflixp2service .
+        - run: docker image tag revflixp2service rennerpa93/revflixp2service
+        - run: docker image push rennerpa93/revflixp2service
+        - run: docker image build -f RevFlix.Client/Dockerfile -t revflixp2client .
+        - run: docker image tag revflixp2client rennerpa93/revflixp2client
+        - run: docker image push rennerpa93/revflixp2client
+        - run: docker logout
+
+name: cibuild
+
+on:
+  push:
+    branches:
+      - master

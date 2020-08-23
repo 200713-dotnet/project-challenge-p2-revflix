@@ -5,6 +5,8 @@ using RevFlix.Service.Controllers.Models;
 using RestSharp;
 using System.Collections.Generic;
 using System.Net;
+using Azure.Security.KeyVault.Secrets;
+using Azure.Identity;
 
 namespace RevFlix.Service.Controllers
 {
@@ -12,6 +14,7 @@ namespace RevFlix.Service.Controllers
   {
     public string ImdbHost { get; set; }
     public string ImdbKey { get; set; }
+    public SecretClient Client { get ; set; }
 
     public ImdbDetailsModel ImdbSDetails(string imdb_id, string message)
     {
@@ -88,6 +91,12 @@ namespace RevFlix.Service.Controllers
 
       ImdbHost = configuration["ApiParams:ImdbHost"];
       ImdbKey = configuration["ApiParams:ImdbKey"];
+
+      // Client = new SecretClient(new Uri("https://revflixkeyvault.vault.azure.net/"), new DefaultAzureCredential());
+      // KeyVaultSecret hostsecret = Client.GetSecret("revflix-p2-imdbhost");
+      // KeyVaultSecret keysecret = Client.GetSecret("revflix-p2-imdbkey");
+      // ImdbHost = hostsecret.Value;
+      // ImdbKey = keysecret.Value;
     }
 
     public IRestResponse RestGet(string endp, string stringp, string message)
