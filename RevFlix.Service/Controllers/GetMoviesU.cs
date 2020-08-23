@@ -8,6 +8,9 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using System.Linq;
+using Azure.Security.KeyVault.Secrets;
+using Azure.Identity;
+
 
 namespace RevFlix.Service.Controllers
 {
@@ -15,6 +18,7 @@ namespace RevFlix.Service.Controllers
   {
     public string UtellyHost { get; set; }
     public string UtellyKey { get; set; }
+    public SecretClient Client { get ; set; }
 
     public IList<ULocationsModel> ULocationDetails(string imdb_id, string message)
     {
@@ -55,6 +59,12 @@ namespace RevFlix.Service.Controllers
 
       UtellyHost = configuration["ApiParams:UtellyHost"];
       UtellyKey = configuration["ApiParams:UtellyKey"];
+
+      // Client = new SecretClient(new Uri("https://revflixkeyvault.vault.azure.net/"), new DefaultAzureCredential());
+      // KeyVaultSecret hostsecret = Client.GetSecret("revflix-p2-utellyhost");
+      // KeyVaultSecret keysecret = Client.GetSecret("revflix-p2-utellykey");
+      // UtellyHost = hostsecret.Value;
+      // UtellyKey = keysecret.Value;
     }
 
     public IRestResponse RestGet(string endp, string message)
