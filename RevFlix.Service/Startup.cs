@@ -32,7 +32,7 @@ namespace RevFlix.Service
       {
         options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo()
         {
-          Version = "1.1",
+          Version = "1.2",
           Title = "RevFlix Movie API"
         });
       });
