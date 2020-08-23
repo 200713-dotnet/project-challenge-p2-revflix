@@ -16,9 +16,8 @@ namespace RevFlix.Service.Controllers
     public string ImdbKey { get; set; }
     public string UtellyHost { get; set; }
     public string UtellyKey { get; set; }
+    public SecretClient Client { get; set; }
     public List<MovieImdbIntModel> GetMoviesImdbI(string searchString, string message)
-    public SecretClient Client { get ; set; }
-    
     {
       var endptType = "&type=get-movies-by-title";
       var url = ImdbHost;
