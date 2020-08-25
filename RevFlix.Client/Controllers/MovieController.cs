@@ -42,22 +42,63 @@ namespace RevFlix.Client.Controllers
         public IActionResult IndexSearch(string userInput)
         {
             IConfiguration configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json", true, true).Build();
-            var client = new RestClient($"http://localhost:5002/movie/imdbi/{userInput}");
+            var client = new RestClient($"https://revflixservice.azurewebsites.net/movie/imdbi/{userInput}");
             var request = new RestRequest(Method.GET);
             request.AddHeader("x-rapidapi-host", "localhost");
             request.AddHeader("x-rapidapi-key", "971bf2ac6fmsh604c84512ded1eap16b86fjsn950b74fe77a7");
             IRestResponse response = client.Execute(request);
 
-            var options = new JsonSerializerOptions
+            try
             {
-                PropertyNameCaseInsensitive = true,
-                IgnoreReadOnlyProperties = true
-            };
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                    IgnoreReadOnlyProperties = true
+                };
 
-            List<MovieIntModel> mvList = new List<MovieIntModel>();
-            mvList = JsonConvert.DeserializeObject<List<MovieIntModel>>(response.Content);
+                List<MovieIntModel> mvList = new List<MovieIntModel>();
+                mvList = JsonConvert.DeserializeObject<List<MovieIntModel>>(response.Content);
+                
+                return View(mvList);
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine(e);
+                return View("Error");
+            }
+        }
 
-            return View(mvList);
+        public IActionResult DisplayDetails(string Imdb_id)
+        {
+            var client = new RestClient($"https://revflixservice.azurewebsites.net/movie/imdbs/1/{Imdb_id}");
+            var request = new RestRequest(Method.GET);
+            var client2 = new RestClient($"https://revflixservice.azurewebsites.net/movie/u/imdb/{Imdb_id}");
+            request.AddHeader("x-rapidapi-host", "localhost");
+            request.AddHeader("x-rapidapi-key", "971bf2ac6fmsh604c84512ded1eap16b86fjsn950b74fe77a7");
+            IRestResponse response = client.Execute(request);
+            IRestResponse response2 = client2.Execute(request);
+
+            try
+            {
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                    IgnoreReadOnlyProperties = true
+                };
+
+                DetailsViewModel mvList = new DetailsViewModel();
+                mvList = JsonConvert.DeserializeObject<DetailsViewModel>(response.Content);
+
+                List<SrcViewModel> srcList = new List<SrcViewModel>();
+                ViewBag.srcList = JsonConvert.DeserializeObject<List<SrcViewModel>>(response2.Content);
+
+                return View(mvList);
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine(e);
+                return View("Error");
+            }
         }
     }
 }

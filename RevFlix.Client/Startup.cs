@@ -29,11 +29,12 @@ namespace RevFlix.Client
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+
+      // --------- Leave these in here for Azure Secrets -----------
       // var client = new SecretClient(new Uri("https://revflixkeyvault.vault.azure.net/"), new DefaultAzureCredential());
       // KeyVaultSecret dbSecret = client.GetSecret("revflix-p2-azuredb");
       // services.AddDbContext<ApplicationDbContext>(options =>
-      //     options.UseSqlServer(
-      //         Configuration.GetConnectionString(dbSecret)));
+      //     options.UseSqlServer(dbSecret.Value));
       services.AddDbContext<ApplicationDbContext>(options =>
           options.UseSqlServer(
               Configuration.GetConnectionString("DefaultConnection")));

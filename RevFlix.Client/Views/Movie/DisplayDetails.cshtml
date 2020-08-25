@@ -1,0 +1,29 @@
+@model RevFlix.Client.Models.DetailsViewModel
+
+<div class="AddtoList">
+    <h1><img src="@Model.Poster" alt="Piture of @Model.title" style="width:100px;height:150px;">
+@Model.title <a class="btn btn-primary" style="text-align: right;" asp-controller="List" asp-action="AddToList" asp-route-Imdb_id="@Model.imdb_id">Add to Watch list</a></h1>
+</div>
+
+<caption>@Model.year, Rating: @Model.imdb_Rating/10</caption>
+@foreach (SrcViewModel item in ViewBag.srcList)
+{
+    <a href="@item.url"><img src="@item.icon" alt="picutre @item.display_Name"></a>
+}
+
+<p>@Model.description</p>
+<h3>Director(s):</h3>
+@foreach(var director in @Model.directors)
+{
+    <p>@director</p>
+}
+<h3>Genre(s)</h3>
+@foreach (var genre in @Model.genres)
+{
+    <p >@genre</p>
+}
+<h3>Actor(s)</h3>
+@foreach (var star in @Model.stars)
+{
+    <p>@star</p>
+}

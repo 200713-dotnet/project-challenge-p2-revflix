@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using RevFlix.Service.Controllers.Models;
 
 namespace RevFlix.Service.Controllers
 {
@@ -14,14 +12,10 @@ namespace RevFlix.Service.Controllers
     {
       var movies = new GetMoviesS();
       string message = null;
-      var list1 = new ImdbDetailsModel();
-      var list2 = new List<MovieImdbModel>();
-
 
       if (id == 1)
       {
-        // imdb_id = "";
-        list1 = movies.ImdbSDetails(imdb_id, message);
+        var list1 = movies.ImdbSDetails(imdb_id, ref message);
         if (message != null)
         {
           return Ok(message);
@@ -35,8 +29,7 @@ namespace RevFlix.Service.Controllers
       }
       else
       {
-        // imdb_id = "";        
-        list2 = movies.ImdbS(id, message);
+        var list2 = movies.ImdbS(id, ref message);
         if (message != null)
         {
           return Ok(message);

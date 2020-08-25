@@ -1,0 +1,19 @@
+@model RevFlix.Client.Models.DetailsViewModel
+
+<div class="AddtoList">
+    <h1>@Model.title </h1>
+</div>
+
+<caption>@Model.year,Rating: @Model.imdb_Rating/10</caption>
+@foreach (SrcViewModel item in ViewBag.srcList)
+{
+    <a href="@item.url"><img src="@item.icon" alt="picutre @item.display_Name"></a>
+}
+<p>@Model.description</p>
+@foreach (var genre in @Model.genres)
+{
+    <p>@genre</p>
+}
+<br>
+
+

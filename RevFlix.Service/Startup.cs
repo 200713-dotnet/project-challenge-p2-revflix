@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using Microsoft.EntityFrameworkCore;
+using Azure.Security.KeyVault.Secrets;
+using Azure.Identity;
+using System;
 
 namespace RevFlix.Service
 {
@@ -19,6 +22,15 @@ namespace RevFlix.Service
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+
+      // --------- Leave these in here for Azure Secrets -----------
+      // var client = new SecretClient(new Uri("https://revflixkeyvault.vault.azure.net/"), new DefaultAzureCredential());
+      // KeyVaultSecret dbSecret = client.GetSecret("revflix-p2-azuredb");
+      // services.AddDbContext<RevFlixDbContext>(options =>
+      //     options.UseSqlServer(dbSecret.Value));
+      services.AddDbContext<RevFlixDbContext>(options =>
+          options.UseSqlServer(
+              Configuration.GetConnectionString("DefaultConnection")));
 
       services.AddCors(options =>
       {

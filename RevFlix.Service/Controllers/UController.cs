@@ -12,7 +12,7 @@ namespace RevFlix.Service.Controllers
     {
       var movies = new GetMoviesU();
       string message = null;
-      var list = movies.ULocationDetails(src_id, message);
+      var list = movies.ULocationDetails(src_id, ref message);
       if (message != null)
       {
         return Ok(message);
@@ -23,9 +23,6 @@ namespace RevFlix.Service.Controllers
         return Ok("Your search did not return any results.");
       }
       return Ok(list);
-
-      // return Ok($"RevFlix API service: You search for the movie '{srch}.'");
-
     }
 
     [HttpPost]

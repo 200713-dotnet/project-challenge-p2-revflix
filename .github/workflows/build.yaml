@@ -8,15 +8,32 @@ jobs:
   test:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2.3.1
-      - run: dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=opencover
+    - uses: Azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - uses: Azure/get-keyvault-secrets@v1.0
+      with:
+        keyvault: "revflixkeyvault"
+        secrets: '*'
+
+    - uses: actions/checkout@v2.3.1
+    - run: dotnet test -p:CollectCoverage=true -p:CoverletOutputFormat=opencover
 
   analyze:
-    needs: [build, test] 
+    needs: [build, test]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2.3.1
       - run: dotnet tool install --global dotnet-sonarscanner
+
+      - uses: Azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - uses: Azure/get-keyvault-secrets@v1.0
+        with:
+          keyvault: "revflixkeyvault"
+          secrets: '*'
+          
       - run: | 
           dotnet sonarscanner begin -o:'rennerpa93' -k:'rennerpa93_RevFlix_P2' -d:sonar.login='d37178d6d45f2a5dbeb2f3df129c276b4945e0a0' -d:sonar.host.url='https://sonarcloud.io/'
           dotnet build

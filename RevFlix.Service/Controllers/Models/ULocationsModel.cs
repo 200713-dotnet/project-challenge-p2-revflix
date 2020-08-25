@@ -10,7 +10,5 @@ namespace RevFlix.Service.Controllers.Models
     public string Id { get; set; }
     public string Name { get; set; }
     public string Url { get; set; }           // link to the movie
-    // public string MovieTitle { get; set; }
-    // public string MoviePicture { get; set; }
   }
 }

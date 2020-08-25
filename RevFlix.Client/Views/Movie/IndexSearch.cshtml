@@ -4,16 +4,16 @@
 {
 <div class="col-sm-4 col-lg-4 col-md-4">
     <div class="thumbnail">
-        <img src="http://placecorgi.com/250" alt="Piture of @item.Title">
+        <img src="http://placecorgi.com/200" alt="Piture of @item.Title">
         <div class="caption">
-            <h2>
-                <a asp-controller="Movie" asp-action="DisplayDetails" asp-route-itemid="@item.Imdb_id">@item.Title</a>
-            </h2>
+            <h3>
+                <a asp-controller="Movie" asp-action="DisplayDetails" asp-route-Imdb_id="@item.Imdb_id">@item.Title</a>
+            </h3>
             <p>@item.Year</p>
         </div>
         <div class="AddtoList">
             <p class="button">
-                <a class="btn btn-primary" asp-controller="List" asp-action="AddtoList" asp-route-pizzaId="@item.Imdb_id">Add Movie</a>
+                <a class="btn btn-primary" asp-controller="List" asp-action="AddToList" asp-route-Imdb_id="@item.Imdb_id">Add to Watch list</a>
             </p>
         </div>
     </div>

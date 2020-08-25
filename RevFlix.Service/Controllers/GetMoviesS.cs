@@ -15,57 +15,64 @@ namespace RevFlix.Service.Controllers
     public string ImdbHost { get; set; }
     public string ImdbKey { get; set; }
     public SecretClient Client { get ; set; }
+    // private string endptType = "";
+    private string Poster = "";
+    private string Fanart = "";
 
-    public ImdbDetailsModel ImdbSDetails(string imdb_id, string message)
+    public ImdbDetails2Model ImdbSDetails(string imdb_id, ref string message)
     {
-
-      var endptType = "/?imdb=" + imdb_id + "&type=get-movie-details";
-
-      imdb_id = "";
-      var response = RestGet(endptType, imdb_id, message);
-
-      try
-      {
-        var options = new JsonSerializerOptions
+      var options = new JsonSerializerOptions
         {
           PropertyNameCaseInsensitive = true,
         };
 
-        ImdbDetailsModel mvList = new ImdbDetailsModel();
-        mvList = JsonSerializer.Deserialize<ImdbDetailsModel>(response.Content, options);
-        return mvList;
+      // get movie picture assets first
+      try
+      { 
+        var endptType = "/?imdb=" + imdb_id + "&type=get-movies-images-by-imdb";
+        var response = RestGet(endptType, "", ref message); 
+        var mvList = JsonSerializer.Deserialize<ImdbDetails2Model>(response.Content, options);
+        Poster = mvList.Poster;
+        Fanart = mvList.Fanart;
 
+        // get the bulk of the movie's details
+        endptType = "/?imdb=" + imdb_id + "&type=get-movie-details";
+        response = RestGet(endptType, "", ref message);
+        mvList = JsonSerializer.Deserialize<ImdbDetails2Model>(response.Content, options);
+        mvList.Poster = Poster;
+        mvList.Fanart = Fanart;        
+        return mvList;
       }
       catch (Exception e)
       {
         Console.WriteLine(e);
-        return null;
+        return new ImdbDetails2Model();
       }
 
     }
 
-    public List<MovieImdbModel> ImdbS(int id, string message)
+    public List<MovieImdbModel> ImdbS(int id, ref string message)
     {
       var page = "1";
-      var endptType = "";
+      var endpT = "";
 
       switch (id)
       {
         case 2:
           var year = DateTime.Today.Year;
-          endptType = "/?type=get-popular-movies" + "&page=" + page + "&year=" + year;
+          endpT = "/?type=get-popular-movies" + "&page=" + page + "&year=" + year;
           break;
         case 3:
-          endptType = "/?page=" + page + "&type=get-trending-movies";
+          endpT = "/?page=" + page + "&type=get-trending-movies";
           break;
         case 4:
-          endptType = "/?page=" + page + "&type=get-recently-added-movies";
+          endpT = "/?page=" + page + "&type=get-recently-added-movies";
           break;
         default:
           break;
       }
 
-      var response = RestGet(endptType, "", message);
+      var response = RestGet(endpT, "", ref message);
 
       try
       {
@@ -74,8 +81,7 @@ namespace RevFlix.Service.Controllers
           PropertyNameCaseInsensitive = true,
         };
 
-        MovieQByTitleModel mvList = new MovieQByTitleModel();
-        mvList = JsonSerializer.Deserialize<MovieQByTitleModel>(response.Content, options);
+        var mvList = JsonSerializer.Deserialize<MovieQByTitleModel>(response.Content, options);
         return mvList.Movie_Results;
       }
       catch (Exception e)
@@ -92,6 +98,7 @@ namespace RevFlix.Service.Controllers
       ImdbHost = configuration["ApiParams:ImdbHost"];
       ImdbKey = configuration["ApiParams:ImdbKey"];
 
+      // --------- Leave these in here for Azure Secrets -----------
       // Client = new SecretClient(new Uri("https://revflixkeyvault.vault.azure.net/"), new DefaultAzureCredential());
       // KeyVaultSecret hostsecret = Client.GetSecret("revflix-p2-imdbhost");
       // KeyVaultSecret keysecret = Client.GetSecret("revflix-p2-imdbkey");
@@ -99,7 +106,7 @@ namespace RevFlix.Service.Controllers
       // ImdbKey = keysecret.Value;
     }
 
-    public IRestResponse RestGet(string endp, string stringp, string message)
+    public IRestResponse RestGet(string endp, string stringp, ref string message)
     {
       var url = ImdbHost;
       url = "https://" + url;
