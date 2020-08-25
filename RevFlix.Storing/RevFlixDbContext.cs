@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using RevFlix.Service.Models;
+using RevFlix.Storing.Models;
 
-namespace RevFlix.Service
+namespace RevFlix.Storing
 {
   public class RevFlixDbContext : DbContext
   {

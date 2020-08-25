@@ -57,6 +57,9 @@ jobs:
         - run: docker image build -f RevFlix.Client/Dockerfile -t revflixp2client .
         - run: docker image tag revflixp2client rennerpa93/revflixp2client
         - run: docker image push rennerpa93/revflixp2client
+        - run: docker image build -f RevFlix.Storing/Dockerfile -t revflixp2storing .
+        - run: docker image tag revflixp2storing rennerpa93/revflixp2storing
+        - run: docker image push rennerpa93/revflixp2storing
         - run: docker logout
 
 name: cibuild

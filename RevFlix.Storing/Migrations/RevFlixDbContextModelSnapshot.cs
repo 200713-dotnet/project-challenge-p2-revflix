@@ -3,17 +3,15 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RevFlix.Service;
+using RevFlix.Storing;
 
-namespace RevFlix.Service.Migrations
+namespace RevFlix.Storing.Migrations
 {
     [DbContext(typeof(RevFlixDbContext))]
-    [Migration("20200823192812_first migration")]
-    partial class firstmigration
+    partial class RevFlixDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,7 +19,7 @@ namespace RevFlix.Service.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("RevFlix.Service.Models.Genre", b =>
+            modelBuilder.Entity("RevFlix.Storing.Models.Genre", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -36,7 +34,7 @@ namespace RevFlix.Service.Migrations
                     b.ToTable("Genre");
                 });
 
-            modelBuilder.Entity("RevFlix.Service.Models.Movie", b =>
+            modelBuilder.Entity("RevFlix.Storing.Models.Movie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,27 +44,19 @@ namespace RevFlix.Service.Migrations
                     b.Property<string>("MovieDetails")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserProfileId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserProfileId");
 
                     b.ToTable("Movie");
                 });
 
-            modelBuilder.Entity("RevFlix.Service.Models.UserGenre", b =>
+            modelBuilder.Entity("RevFlix.Storing.Models.UserGenre", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("GenreId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
+                    b.Property<int?>("GenreId")
                         .HasColumnType("int");
 
                     b.Property<int?>("UserProfileId")
@@ -81,7 +71,7 @@ namespace RevFlix.Service.Migrations
                     b.ToTable("UserGenre");
                 });
 
-            modelBuilder.Entity("RevFlix.Service.Models.UserMovie", b =>
+            modelBuilder.Entity("RevFlix.Storing.Models.UserMovie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -91,10 +81,10 @@ namespace RevFlix.Service.Migrations
                     b.Property<int?>("GenreId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MovieId")
+                    b.Property<int?>("MovieId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UserProfileId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -103,10 +93,12 @@ namespace RevFlix.Service.Migrations
 
                     b.HasIndex("MovieId");
 
+                    b.HasIndex("UserProfileId");
+
                     b.ToTable("UserMovie");
                 });
 
-            modelBuilder.Entity("RevFlix.Service.Models.UserProfile", b =>
+            modelBuilder.Entity("RevFlix.Storing.Models.UserProfile", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -121,37 +113,30 @@ namespace RevFlix.Service.Migrations
                     b.ToTable("UserProfile");
                 });
 
-            modelBuilder.Entity("RevFlix.Service.Models.Movie", b =>
+            modelBuilder.Entity("RevFlix.Storing.Models.UserGenre", b =>
                 {
-                    b.HasOne("RevFlix.Service.Models.UserProfile", null)
-                        .WithMany("WatchList")
-                        .HasForeignKey("UserProfileId");
-                });
-
-            modelBuilder.Entity("RevFlix.Service.Models.UserGenre", b =>
-                {
-                    b.HasOne("RevFlix.Service.Models.Genre", null)
+                    b.HasOne("RevFlix.Storing.Models.Genre", "Genre")
                         .WithMany("UserGenres")
-                        .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GenreId");
 
-                    b.HasOne("RevFlix.Service.Models.UserProfile", null)
+                    b.HasOne("RevFlix.Storing.Models.UserProfile", "UserProfile")
                         .WithMany("UserGenres")
                         .HasForeignKey("UserProfileId");
                 });
 
-            modelBuilder.Entity("RevFlix.Service.Models.UserMovie", b =>
+            modelBuilder.Entity("RevFlix.Storing.Models.UserMovie", b =>
                 {
-                    b.HasOne("RevFlix.Service.Models.Genre", null)
+                    b.HasOne("RevFlix.Storing.Models.Genre", null)
                         .WithMany("WatchList")
                         .HasForeignKey("GenreId");
 
-                    b.HasOne("RevFlix.Service.Models.Movie", null)
+                    b.HasOne("RevFlix.Storing.Models.Movie", "Movie")
                         .WithMany("UserMovies")
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MovieId");
+
+                    b.HasOne("RevFlix.Storing.Models.UserProfile", "UserProfile")
+                        .WithMany("WatchList")
+                        .HasForeignKey("UserProfileId");
                 });
 #pragma warning restore 612, 618
         }

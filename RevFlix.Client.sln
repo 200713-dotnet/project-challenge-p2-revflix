@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevFlix.Service", "RevFlix.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevFlix.Testing", "RevFlix.Testing\RevFlix.Testing.csproj", "{61B2A302-CDA9-475F-AD5D-85559143FBED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RevFlix.Storing", "RevFlix.Storing\RevFlix.Storing.csproj", "{56DC4CB0-4C0B-498B-921C-95AEF7594048}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{61B2A302-CDA9-475F-AD5D-85559143FBED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61B2A302-CDA9-475F-AD5D-85559143FBED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61B2A302-CDA9-475F-AD5D-85559143FBED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56DC4CB0-4C0B-498B-921C-95AEF7594048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56DC4CB0-4C0B-498B-921C-95AEF7594048}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56DC4CB0-4C0B-498B-921C-95AEF7594048}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56DC4CB0-4C0B-498B-921C-95AEF7594048}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

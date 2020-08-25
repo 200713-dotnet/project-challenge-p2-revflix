@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using RevFlix.Service.Models;
+using RevFlix.Storing.Models;
 
-namespace RevFlix.Service.Repositories
+namespace RevFlix.Storing.Repositories
 {
   public class UserProfileRepository
   {

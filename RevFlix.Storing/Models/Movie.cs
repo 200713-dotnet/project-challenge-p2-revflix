@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace RevFlix.Service.Models
+namespace RevFlix.Storing.Models
 {
   public class Movie {
     public int Id { get; set; }

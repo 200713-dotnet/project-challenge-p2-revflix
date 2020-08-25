@@ -1,4 +1,4 @@
-namespace RevFlix.Service.Models
+namespace RevFlix.Storing.Models
 {
   public class UserGenre {
     public int Id { get; set; }
