@@ -436,4 +436,4 @@ $RECYCLE.BIN/
 appsettings*.json
 *migration.Designer.cs
 *migration.cs
-*/Migrations/*
+*Migrations/*
