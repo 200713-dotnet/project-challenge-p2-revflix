@@ -1,6 +1,6 @@
 using System;
 using System.Text.Json;
-using RevFlix.Service.Controllers.Models;
+using RevFlix.Service.Models;
 using System.Collections.Generic;
 
 namespace RevFlix.Service.Controllers

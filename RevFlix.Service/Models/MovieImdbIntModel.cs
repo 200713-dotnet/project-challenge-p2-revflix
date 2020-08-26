@@ -7,5 +7,9 @@ namespace RevFlix.Service.Models
     {
 
     }
+    public override string ToString()
+    {
+      return $"Imdb ID: {Imdb_id}, Title: {Title}, Year: {Year}";
+    }    
   }
 }
