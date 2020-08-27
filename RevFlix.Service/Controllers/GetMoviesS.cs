@@ -1,7 +1,7 @@
 using System;
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
-using RevFlix.Service.Controllers.Models;
+using RevFlix.Service.Models;
 using RestSharp;
 using System.Collections.Generic;
 using System.Net;

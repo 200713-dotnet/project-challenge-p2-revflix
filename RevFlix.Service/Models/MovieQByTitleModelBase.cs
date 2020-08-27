@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace RevFlix.Service.Models
 {
   public class MovieQByTitleModelBase

@@ -1,4 +1,4 @@
-namespace RevFlix.Service.Controllers.Models
+namespace RevFlix.Service.Models
 {
   public class UImdbModel
   {
