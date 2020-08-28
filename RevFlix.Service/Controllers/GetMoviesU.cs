@@ -65,15 +65,15 @@ namespace RevFlix.Service.Controllers
     {
       var configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json", true, true).Build();
 
-      // UtellyHost = configuration["ApiParams:UtellyHost"];
-      // UtellyKey = configuration["ApiParams:UtellyKey"];
+      UtellyHost = configuration["ApiParams:UtellyHost"];
+      UtellyKey = configuration["ApiParams:UtellyKey"];
 
       // --------- Leave these in here for Azure Secrets -----------
-      Client = new SecretClient(new Uri("https://revflixkeyvault.vault.azure.net/"), new DefaultAzureCredential());
-      KeyVaultSecret hostsecret = Client.GetSecret("revflix-p2-utellyhost");
-      KeyVaultSecret keysecret = Client.GetSecret("revflix-p2-utellykey");
-      UtellyHost = hostsecret.Value;
-      UtellyKey = keysecret.Value;
+      // Client = new SecretClient(new Uri("https://revflixkeyvault.vault.azure.net/"), new DefaultAzureCredential());
+      // KeyVaultSecret hostsecret = Client.GetSecret("revflix-p2-utellyhost");
+      // KeyVaultSecret keysecret = Client.GetSecret("revflix-p2-utellykey");
+      // UtellyHost = hostsecret.Value;
+      // UtellyKey = keysecret.Value;
 
     }
 
