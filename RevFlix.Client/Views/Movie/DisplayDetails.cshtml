@@ -1,29 +1,65 @@
 @model RevFlix.Client.Models.DetailsViewModel
 
 <div class="AddtoList">
-    <h1><img src="@Model.Poster" alt="Piture of @Model.title" style="width:100px;height:150px;">
+    <h1><img src="@Model.Poster" alt="Picture of @Model.title" style="width:100px;height:150px;">
 @Model.title <a class="btn btn-primary" style="text-align: right;" asp-controller="List" asp-action="AddToList" asp-route-Imdb_id="@Model.imdb_id">Add to Watch list</a></h1>
 </div>
 
-<caption>@Model.year, Rating: @Model.imdb_Rating/10</caption>
-@foreach (SrcViewModel item in ViewBag.srcList)
-{
-    <a href="@item.url"><img src="@item.icon" alt="picutre @item.display_Name"></a>
-}
+<p style="font-weight:bold">@Model.year, Rating: @Model.imdb_Rating/10</p>
 
 <p>@Model.description</p>
+
+@if (ViewBag.srcList != null)
+{
+  <table>
+    <tr>
+  @foreach (SrcViewModel item in ViewBag.srcList)
+  {
+    <td>
+      <a href="@item.url"><img src="@item.icon" alt="picture @item.display_Name"></a>
+    </td>
+    
+  }
+    </tr>
+  </table>
+}
+
+@if(!String.IsNullOrEmpty(@Model.youtube_Trailer_Key))
+{
+  var yturl = "https://www.youtube.com/watch?v=" + @Model.youtube_Trailer_Key;
+  <a href="@yturl">Watch the YouTube Trailer</a> 
+}
+<br/>
 <h3>Director(s):</h3>
-@foreach(var director in @Model.directors)
+@if(@Model.directors != null)
 {
+  var dirline = string.Join(", ", @Model.directors);
+  @* @foreach(var director in @Model.directors)
+  {
     <p>@director</p>
+  } *@
+  <p>@dirline</p>
 }
-<h3>Genre(s)</h3>
-@foreach (var genre in @Model.genres)
+
+<h3>Genre(s):</h3>
+@if(@Model.genres != null)
 {
+  var genline = string.Join(", ", @Model.genres);
+  @* @foreach (var genre in @Model.genres)
+  {
     <p >@genre</p>
+  } *@
+  <p >@genline</p>
 }
-<h3>Actor(s)</h3>
-@foreach (var star in @Model.stars)
+
+<h3>Actor(s):</h3>
+@if(@Model.stars != null)
 {
+  var starsline = string.Join(", ", @Model.stars);
+  @* @foreach (var star in @Model.stars)
+  {
     <p>@star</p>
+  } *@
+  <p>@starsline</p>
 }
+

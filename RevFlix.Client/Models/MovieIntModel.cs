@@ -9,6 +9,7 @@ namespace RevFlix.Client.Models
         public string Title { get; set; }
 
         public string Imdb_id { get; set; }
+        // public int Search_Results { get; set; }
         [DisplayName("Serach")]
         public string SearchText { get; set; }
         public MovieIntModel()
