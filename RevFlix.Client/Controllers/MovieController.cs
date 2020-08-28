@@ -57,9 +57,17 @@ namespace RevFlix.Client.Controllers
                 };
 
                 List<MovieIntModel> mvList = new List<MovieIntModel>();
-                mvList = JsonConvert.DeserializeObject<List<MovieIntModel>>(response.Content);
                 
+                try
+                {
+                  mvList = JsonConvert.DeserializeObject<List<MovieIntModel>>(response.Content);
+                }
+                catch (Exception e)
+                {
+                  System.Console.WriteLine(e);
+                }
                 return View(mvList);
+            
             }
             catch (Exception e)
             {
@@ -90,8 +98,17 @@ namespace RevFlix.Client.Controllers
                 mvList = JsonConvert.DeserializeObject<DetailsViewModel>(response.Content);
 
                 List<SrcViewModel> srcList = new List<SrcViewModel>();
-                ViewBag.srcList = JsonConvert.DeserializeObject<List<SrcViewModel>>(response2.Content);
-
+                // wrap this in try-catch so we can still return the correct View even if deserializer throws an exception
+                // null fields should be skipped over in the view
+                try
+                {
+                  ViewBag.srcList = JsonConvert.DeserializeObject<List<SrcViewModel>>(response2.Content);
+                }
+                catch (Exception e)
+                {
+                  System.Console.WriteLine(e);
+                }
+                
                 return View(mvList);
             }
             catch (Exception e)
