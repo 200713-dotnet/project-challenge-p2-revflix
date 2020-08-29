@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "RevFlixAngular"
+    }
+  },
+  "defaultProject": "RevFlixAngular",
+  "cli": {
+    "analytics": "b8235714-6c51-47b1-98cb-7f7935bede0d"
+  }
 }
