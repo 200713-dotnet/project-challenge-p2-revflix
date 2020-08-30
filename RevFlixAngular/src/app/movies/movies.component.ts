@@ -13,7 +13,7 @@ import { Location } from '@angular/common';
 export class MoviesComponent implements OnInit {
 
   movies: Movie[];
-  selectedMovie: Movie;
+  // selectedMovie: Movie;
   
   constructor(
     private route: ActivatedRoute,

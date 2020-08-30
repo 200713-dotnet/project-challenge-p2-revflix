@@ -6,6 +6,7 @@ import { MoviesComponent } from './movies/movies.component';
 import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SearchmenuComponent } from './searchmenu/searchmenu.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { SearchmenuComponent } from './searchmenu/searchmenu.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     AppRoutingModule
   ],
