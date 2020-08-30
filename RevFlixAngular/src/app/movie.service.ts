@@ -10,7 +10,7 @@ export class MovieService {
 
   constructor() { }
 
-  getMovies(): Observable<Movie[]> {
+  getMovies(type: string, title: string): Observable<Movie[]> {
     return of(MOVIES);
   }
   

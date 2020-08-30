@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Movie } from '../movie';
 // import { MOVIES } from '../mock-movies';
 import { MovieService } from '../movie.service';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-movies',
@@ -9,34 +11,27 @@ import { MovieService } from '../movie.service';
   styleUrls: ['./movies.component.css']
 })
 export class MoviesComponent implements OnInit {
-  // movie: Movie = {
-  //   imdb_id: "tt2935510",
-  //   title: "Ad Astra",
-  //   year: 2019
-  // }
 
-  // movies = MOVIES;
   movies: Movie[];
   selectedMovie: Movie;
-  // onSelect(movie: Movie): void {
-  //   this.selectedMovie = movie;
-  // }
   
-  constructor(private movieService: MovieService) {
-    // this.movies.forEach(movie => {
-    //   movie.titleyear = movie.title + ' (' + movie.year + ')';      
-    // });
-   }
+  constructor(
+    private route: ActivatedRoute,
+    private movieService: MovieService,
+    private location: Location
+    ) {}
 
   ngOnInit(): void {
     this.getMovies();
   }
   
-  onSelect(movie: Movie): void {
-    this.selectedMovie = movie;
+  getMovies(): void {
+    const type = this.route.snapshot.paramMap.get('searchType');
+    const title = this.route.snapshot.paramMap.get('searchTitle');
+    this.movieService.getMovies(type, title).subscribe(movies => this.movies = movies);
   }
   
-  getMovies(): void {
-    this.movieService.getMovies().subscribe(movies => this.movies = movies);
+  goBack(): void {
+    this.location.back();
   }
 }

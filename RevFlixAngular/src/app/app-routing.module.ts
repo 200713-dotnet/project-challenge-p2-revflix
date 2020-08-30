@@ -8,7 +8,8 @@ const routes: Routes = [
   { path: '', redirectTo: '/search', pathMatch: 'full' },
   { path: 'search', component: SearchmenuComponent },
   { path: 'detail/:id', component: MovieDetailComponent},
-  { path: 'movies', component: MoviesComponent }
+  { path: 'movies/:searchType', component: MoviesComponent },
+  { path: 'movies/:searchType/:searchTitle', component: MoviesComponent }
 ];
 
 @NgModule({

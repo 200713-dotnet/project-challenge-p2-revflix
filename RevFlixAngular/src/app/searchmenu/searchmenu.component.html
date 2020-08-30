@@ -1,6 +1,7 @@
 <h3>Search Menu</h3>
 <div class="grid grid-pad">
-  <a *ngFor="let search of searches" class="col-1-4">
+  <a *ngFor="let search of searches" class="col-1-4"
+      routerLink="/movies/{{ search.index }}">
     <div class="module search">
       <h4>{{search.name}}</h4>
     </div>
