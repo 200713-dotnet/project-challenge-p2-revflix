@@ -8,7 +8,7 @@ spec:
   ports:
   - name: revflixp2angular
     port: 80
-    targetPort: revflixp2angular-port
+    targetPort: angular-port
   selector:
     app: revflixp2angular
   type: LoadBalancer

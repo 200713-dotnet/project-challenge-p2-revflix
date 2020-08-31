@@ -8,7 +8,7 @@ spec:
   ports:
   - name: revflixp2storing
     port: 80
-    targetPort: revflixp2storing-port
+    targetPort: storing-port
   selector:
     app: revflixp2storing
   type: LoadBalancer

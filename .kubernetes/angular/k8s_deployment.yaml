@@ -19,4 +19,4 @@ spec:
         name: revflixp2angular
         ports:
           - containerPort: 4200
-            name: revflixp2angular-port
+            name: angular-port

@@ -8,7 +8,7 @@ spec:
   ports:
   - name: revflixp2client
     port: 80
-    targetPort: revflixp2client-port
+    targetPort: client-port
   selector:
     app: revflixp2client
   type: LoadBalancer

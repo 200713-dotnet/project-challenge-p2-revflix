@@ -19,4 +19,4 @@ spec:
         name: revflixp2storing
         ports:
           - containerPort: 80
-            name: revflixp2storing-port
+            name: storing-port
