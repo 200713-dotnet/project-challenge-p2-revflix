@@ -1,7 +1,16 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { MoviesComponent } from './movies/movies.component';
+import { SearchmenuComponent } from './searchmenu/searchmenu.component';
+import { MovieDetailComponent } from './movie-detail/movie-detail.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: '', redirectTo: '/search', pathMatch: 'full' },
+  { path: 'search', component: SearchmenuComponent },
+  { path: 'detail/:id', component: MovieDetailComponent},
+  { path: 'movies/:searchType', component: MoviesComponent },
+  { path: 'movies/:searchType/:searchTitle', component: MoviesComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

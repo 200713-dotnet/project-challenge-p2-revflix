@@ -56,7 +56,7 @@ namespace RevFlix.Service
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "RevFlix Movie API v1");
       });
 
-
+      app.UseCors();
 
       app.UseAuthorization();
 

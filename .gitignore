@@ -438,3 +438,6 @@ appsettings*.json
 *migration.cs
 *ContextModelSnapshot.cs
 *CreateIdentitySchema*
+
+# angular
+node_modules/
