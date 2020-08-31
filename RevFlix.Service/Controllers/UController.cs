@@ -1,9 +1,10 @@
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RevFlix.Service.Controllers
 {
   [Route("/movie/u/imdb/{src_id}")]
-  // [EnableCors("private")]  
+  [EnableCors]  
   public class UController : ControllerBase
   {
 

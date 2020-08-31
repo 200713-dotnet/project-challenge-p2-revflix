@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 
 import { MovieService } from '../movie.service';
 import { Details } from '../details';
+import { Locations } from '../locations';
 
 @Component({
   selector: 'app-movie-detail',
@@ -15,9 +16,10 @@ export class MovieDetailComponent implements OnInit {
   
   @Input() movie: Movie;
   details: Details;
-  
-  // yturl = "https://www.youtube.com/watch?v=" + this.details.youtube_Trailer_Key;
+  locations: Locations[];
 
+  // imdbId: string = "";
+  
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService,
@@ -26,6 +28,7 @@ export class MovieDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDetails();
+    // this.getLocations();
   }
   
   getMovie(): void {
@@ -38,9 +41,18 @@ export class MovieDetailComponent implements OnInit {
     const imdb_id = this.route.snapshot.paramMap.get('id');
     this.movieService.getDetails(imdb_id)
       .subscribe(details => this.details = details);
+    this.movieService.getLocations(imdb_id)
+      .subscribe(locations => this.locations = locations);
   }
   
+  // getLocations(): void {
+  //   // const imdb_id = this.route.snapshot.paramMap.get('id');
+  //   this.movieService.getLocations(this.imdbId)
+  //     .subscribe(locations => this.locations = locations);
+  // }
+
   goBack(): void {
     this.location.back();
   }
+
 }

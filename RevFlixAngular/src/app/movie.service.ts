@@ -45,8 +45,8 @@ export class MovieService {
     )  
   }
 
-  getLocations(title: string): Observable<Locations[]> {
-    this.moviesUrl = this.hostWebApi + 'u/imdb/' + title;
+  getLocations(imdb_id: string): Observable<Locations[]> {
+    this.moviesUrl = this.hostWebApi + 'u/imdb/' + imdb_id;
     return this.http.get<Locations[]>(this.moviesUrl)
     .pipe(
         catchError(this.handleError<Locations[]>('getLocations', ))

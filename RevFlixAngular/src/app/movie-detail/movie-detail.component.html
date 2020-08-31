@@ -1,22 +1,27 @@
 <div *ngIf="details">
 
-  <!-- <h1><img src="{{details.poster}}" alt="poster picture" style="width:100px;height:150px;">{{details.title + ' (' + details.year + ')'}}</h1> -->
   <table>
     <tr>
       <td rowspan="3"><img src="{{details.poster}}" alt="poster picture" style="width:100px;height:150px;"></td>
       <td><h1>{{details.title + ' (' + details.year + ')'}}</h1></td>
     </tr>
     <tr>
-      <!-- <td></td> -->
       <td style="font-weight:bold">Rating: {{details.imdb_Rating}}/10</td>
     </tr>
     <tr>
-      <!-- <td></td> -->
-      <!-- <a href="{{yturl}}">Watch the YouTube Trailer</a> -->
       <a href="{{'https://www.youtube.com/watch?v=' + details.youtube_Trailer_Key }}">Watch the YouTube Trailer</a>
     </tr>
   </table>
-  <!-- <p style="font-weight:bold">Rating: {{details.imdb_Rating}}/10</p> -->
+
+  <div *ngIf="locations">
+    <p style="font-weight:bold">Movie Locations:</p>
+    <table>
+      <tr>
+        <td *ngFor="let loc of locations"><a href={{loc.url}}><img src={{loc.icon}} alt="icon of movie source"></a></td>
+      </tr>
+    </table>
+  </div>
+  <p style="font-weight:bold">Description:</p>
   <p>{{details.description}}</p>
   <p style="font-weight:bold">Genres:</p>
   <p>{{ details.genres }}</p>
@@ -24,13 +29,6 @@
   <p>{{ details.directors }}</p>
   <p style="font-weight:bold">Stars:</p>
   <p>{{ details.stars }}</p>
-
-  <!-- <div><span>Imdb Id: </span>{{movie.imdb_id}}</div>
-  <div>
-    <label>
-      <input [(ngModel)]="movie.title" placeholder="title"/>
-    </label>
-  </div> -->
   
 </div>
 <button (click)="goBack()">go back</button>
