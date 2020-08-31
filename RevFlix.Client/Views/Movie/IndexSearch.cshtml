@@ -1,25 +1,5 @@
 @model List<RevFlix.Client.Models.MovieIntModel>
 
-@* @foreach (var item in Model)
-{
-<div class="col-sm-4 col-lg-4 col-md-4">
-    <div class="thumbnail">
-        <img src="http://placecorgi.com/200" alt="Piture of @item.Title">
-        <div class="caption">
-            <h3>
-                <a asp-controller="Movie" asp-action="DisplayDetails" asp-route-Imdb_id="@item.Imdb_id">@item.Title</a>
-            </h3>
-            <p>@item.Year</p>
-        </div>
-        <div class="AddtoList">
-            <p class="button">
-                <a class="btn btn-primary" asp-controller="List" asp-action="AddToList" asp-route-Imdb_id="@item.Imdb_id">Add to Watch list</a>
-            </p>
-        </div>
-    </div>
-</div>
-} *@
-
 <h1>RevFlix: Movie Search by Title Results<br/></h1>
 	@if (@Model.Count == 0 || @Model == null)
   {
@@ -29,10 +9,12 @@
   {
     <table class="table table-bordered table-responsive table-hover">
 			<thead>
+        <caption></caption>
+        <th></th>
 				<tr align="center">
-					<td><b>Title</b></td>
-					<td><b>Year Released</b></td>
-					<td><b>IMDB ID</b></td>
+					<td><strong>Title</strong></td>
+					<td><strong>Year Released</strong></td>
+					<td><strong>IMDB ID</strong></td>
           <td></td>
   			</tr>
 			</thead><br/>
@@ -57,13 +39,6 @@
 					</tr>
         }
 			</tbody>
-      @* <tfoot>
-        <tr>
-          <td></td>
-          <td></td>
-          <td><b>No. of Results = @Model.Results</b></td>
-        </tr>
-      </tfoot> *@
 		</table>
   <br/>
 

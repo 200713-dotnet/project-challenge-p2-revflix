@@ -12,13 +12,14 @@
 @if (ViewBag.srcList != null)
 {
   <table>
+    <caption></caption>
+    <th></th>
     <tr>
   @foreach (SrcViewModel item in ViewBag.srcList)
   {
     <td>
       <a href="@item.url"><img src="@item.icon" alt="picture @item.display_Name"></a>
     </td>
-    
   }
     </tr>
   </table>
@@ -34,10 +35,6 @@
 @if(@Model.directors != null)
 {
   var dirline = string.Join(", ", @Model.directors);
-  @* @foreach(var director in @Model.directors)
-  {
-    <p>@director</p>
-  } *@
   <p>@dirline</p>
 }
 
@@ -45,10 +42,6 @@
 @if(@Model.genres != null)
 {
   var genline = string.Join(", ", @Model.genres);
-  @* @foreach (var genre in @Model.genres)
-  {
-    <p >@genre</p>
-  } *@
   <p >@genline</p>
 }
 
@@ -56,10 +49,6 @@
 @if(@Model.stars != null)
 {
   var starsline = string.Join(", ", @Model.stars);
-  @* @foreach (var star in @Model.stars)
-  {
-    <p>@star</p>
-  } *@
   <p>@starsline</p>
 }
 
