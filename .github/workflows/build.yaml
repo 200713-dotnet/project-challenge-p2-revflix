@@ -103,7 +103,7 @@ jobs:
         - run: docker logout
 
   deploy_mvc:
-    needs: package_mvc
+    needs: package-mvc
     runs-on: ubuntu-20.04
     steps:
     - uses: Azure/login@v1
@@ -116,7 +116,7 @@ jobs:
     - run: az logout
 
   deploy_storing:
-    needs: package_storing
+    needs: package-storing
     runs-on: ubuntu-20.04
     steps:
     - uses: Azure/login@v1
@@ -129,7 +129,7 @@ jobs:
     - run: az logout
 
   deploy_service:
-    needs: package_service
+    needs: package-service
     runs-on: ubuntu-20.04
     steps:
     - uses: Azure/login@v1
@@ -142,7 +142,7 @@ jobs:
     - run: az logout
 
   deploy_angular:
-    needs: package_angular
+    needs: package-angular
     runs-on: ubuntu-20.04
     steps:
     - uses: Azure/login@v1
