@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Azure.Security.KeyVault.Secrets;
 using Azure.Identity;
+using System;
 
 namespace RevFlix.Client
 {
