@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: revflixp2angular
+  name: revflixp2angular
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: revflixp2angular
+  template:
+    metadata:
+      labels:
+        app: revflixp2angular
+    spec:
+      containers:
+      - image: rennerpa93/revflixp2angular
+        name: revflixp2angular
+        ports:
+          - containerPort: 4200
+            name: revflixp2angular-port
