@@ -95,15 +95,15 @@ namespace RevFlix.Service.Controllers
     {
       IConfiguration configuration = new ConfigurationBuilder().AddJsonFile("appsettings.json", true, true).Build();
 
-      ImdbHost = configuration["ApiParams:ImdbHost"];
-      ImdbKey = configuration["ApiParams:ImdbKey"];
+      // ImdbHost = configuration["ApiParams:ImdbHost"];
+      // ImdbKey = configuration["ApiParams:ImdbKey"];
 
       // --------- Leave these in here for Azure Secrets -----------
-      // Client = new SecretClient(new Uri("https://revflixkeyvault.vault.azure.net/"), new DefaultAzureCredential());
-      // KeyVaultSecret hostsecret = Client.GetSecret("revflix-p2-imdbhost");
-      // KeyVaultSecret keysecret = Client.GetSecret("revflix-p2-imdbkey");
-      // ImdbHost = hostsecret.Value;
-      // ImdbKey = keysecret.Value;
+      Client = new SecretClient(new Uri("https://revflixkeyvault.vault.azure.net/"), new DefaultAzureCredential());
+      KeyVaultSecret hostsecret = Client.GetSecret("revflix-p2-imdbhost");
+      KeyVaultSecret keysecret = Client.GetSecret("revflix-p2-imdbkey");
+      ImdbHost = hostsecret.Value;
+      ImdbKey = keysecret.Value;
     }
 
     public IRestResponse RestGet(string endp, string stringp, ref string message)
