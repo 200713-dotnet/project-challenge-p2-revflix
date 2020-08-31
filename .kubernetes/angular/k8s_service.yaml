@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: revflixp2angular
+    name: revflixp2angular
+spec:
+  ports:
+  - name: revflixp2angular
+    port: 80
+    targetPort: revflixp2angular-port
+  selector:
+    app: revflixp2angular
+  type: LoadBalancer

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: revflixp2storing
+  name: revflixp2storing
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: revflixp2storing
+  template:
+    metadata:
+      labels:
+        app: revflixp2storing
+    spec:
+      containers:
+      - image: rennerpa93/revflixp2storing
+        name: revflixp2storing
+        ports:
+          - containerPort: 80
+            name: revflixp2storing-port

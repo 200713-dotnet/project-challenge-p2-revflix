@@ -85,6 +85,23 @@ jobs:
         - run: docker image push rennerpa93/revflixp2service
         - run: docker logout
 
+  package-service:
+    defaults:
+      run:
+        working-directory: RevFlixAngular/
+    env:
+      DOCKER_LOGIN: ${{ secrets.DOCKER_LOGIN }}
+      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+    needs: [analyze]
+    runs-on: ubuntu-20.04
+    steps:
+        - uses: actions/checkout@v2.3.1
+        - run: echo ${DOCKER_TOKEN} | docker login --username ${DOCKER_LOGIN} --password-stdin
+        - run: docker image build -f Dockerfile -t revflixp2angular .
+        - run: docker image tag revflixp2angular rennerpa93/revflixp2angular
+        - run: docker image push rennerpa93/revflixp2angular
+        - run: docker logout
+
 name: revflix-pipeline
 
 on:
