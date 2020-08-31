@@ -85,7 +85,7 @@ jobs:
         - run: docker image push rennerpa93/revflixp2service
         - run: docker logout
 
-  package-service:
+  package-angular:
     defaults:
       run:
         working-directory: RevFlixAngular/
