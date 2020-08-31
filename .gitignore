@@ -433,7 +433,7 @@ $RECYCLE.BIN/
 !.vscode/extensions.json
 
 .vscode
-appsettings*.json
+# appsettings*.json
 *migration.Designer.cs
 *migration.cs
 *ContextModelSnapshot.cs

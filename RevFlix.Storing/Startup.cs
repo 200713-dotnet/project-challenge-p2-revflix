@@ -24,14 +24,14 @@ namespace RevFlix.Storing
     {
 
       // --------- Leave these in here for Azure Secrets -----------
-      var client = new SecretClient(new Uri("https://revflixkeyvault.vault.azure.net/"), new DefaultAzureCredential());
-      KeyVaultSecret dbSecret = client.GetSecret("revflix-p2-azuredb");
-      services.AddDbContext<RevFlixDbContext>(options =>
-          options.UseSqlServer(dbSecret.Value));
-
+      // var client = new SecretClient(new Uri("https://revflixkeyvault.vault.azure.net/"), new DefaultAzureCredential());
+      // KeyVaultSecret dbSecret = client.GetSecret("revflix-p2-azuredb");
       // services.AddDbContext<RevFlixDbContext>(options =>
-      //     options.UseSqlServer(
-      //         Configuration.GetConnectionString("DefaultConnection")));
+      //     options.UseSqlServer(dbSecret.Value));
+
+      services.AddDbContext<RevFlixDbContext>(options =>
+          options.UseSqlServer(
+              Configuration.GetConnectionString("DefaultConnection")));
 
       services.AddCors(options =>
       {
