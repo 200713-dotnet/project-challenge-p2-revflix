@@ -16,8 +16,8 @@ namespace RevFlix.Service.Controllers
     public string ImdbKey { get; set; }
     public SecretClient Client { get ; set; }
     // private string endptType = "";
-    private string Poster = "";
-    private string Fanart = "";
+    // private string Poster = "";
+    // private string Fanart = "";
 
     public ImdbDetails2Model ImdbSDetails(string imdb_id, ref string message)
     {
@@ -32,8 +32,8 @@ namespace RevFlix.Service.Controllers
         var endptType = "/?imdb=" + imdb_id + "&type=get-movies-images-by-imdb";
         var response = RestGet(endptType, "", ref message); 
         var mvList = JsonSerializer.Deserialize<ImdbDetails2Model>(response.Content, options);
-        Poster = mvList.Poster;
-        Fanart = mvList.Fanart;
+        var Poster = mvList.Poster;
+        var Fanart = mvList.Fanart;
 
         // get the bulk of the movie's details
         endptType = "/?imdb=" + imdb_id + "&type=get-movie-details";
@@ -87,7 +87,7 @@ namespace RevFlix.Service.Controllers
       catch (Exception e)
       {
         Console.WriteLine(e);
-        return null;
+        return new List<MovieImdbModel>();
       }
 
     }

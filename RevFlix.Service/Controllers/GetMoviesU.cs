@@ -54,7 +54,7 @@ namespace RevFlix.Service.Controllers
         catch (Exception e)
         {
           Console.WriteLine(e);
-          return null;
+          return new List<ULocationsModel>();
         }
       }
 

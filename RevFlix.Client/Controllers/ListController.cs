@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using RestSharp;
@@ -20,16 +19,18 @@ namespace RevFlix.Client.Controllers
             IRestResponse response = client.Execute(request);
             IRestResponse response2 = client2.Execute(request);
 
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-                IgnoreReadOnlyProperties = true
-            };
+            // var options = new JsonSerializerOptions
+            // {
+            //     PropertyNameCaseInsensitive = true,
+            //     IgnoreReadOnlyProperties = true
+            // };
 
-            DetailsViewModel mvList = new DetailsViewModel();
+            // DetailsViewModel mvList = new DetailsViewModel();
+            var mvList = new DetailsViewModel();
             mvList = JsonConvert.DeserializeObject<DetailsViewModel>(response.Content);
 
-            List<SrcViewModel> srcList = new List<SrcViewModel>();
+            // List<SrcViewModel> srcList = new List<SrcViewModel>();
+            var srcList = new List<SrcViewModel>();
             ViewBag.srcList = JsonConvert.DeserializeObject<List<SrcViewModel>>(response2.Content);
 
             return View(mvList);
@@ -40,13 +41,14 @@ namespace RevFlix.Client.Controllers
             var request = new RestRequest(Method.GET);
             IRestResponse response = client.Execute(request);
             
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-                IgnoreReadOnlyProperties = true
-            };
+            // var options = new JsonSerializerOptions
+            // {
+            //     PropertyNameCaseInsensitive = true,
+            //     IgnoreReadOnlyProperties = true
+            // };
 
-            DetailsViewModel mvList = new DetailsViewModel();
+            // DetailsViewModel mvList = new DetailsViewModel();
+            var mvList = new DetailsViewModel();
             mvList = JsonConvert.DeserializeObject<DetailsViewModel>(response.Content);
             TempData["id"] = mvList.imdb_id;
 
