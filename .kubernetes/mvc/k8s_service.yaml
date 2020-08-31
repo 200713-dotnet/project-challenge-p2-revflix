@@ -3,7 +3,7 @@ kind: Service
 metadata:
   labels:
     app: revflixp2client
-    name: revflixp2client
+  name: revflixp2client
 spec:
   ports:
   - name: revflixp2client
