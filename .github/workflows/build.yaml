@@ -106,53 +106,53 @@ jobs:
     needs: package_mvc
     runs-on: ubuntu-20.04
     steps:
-      - uses: Azure/login@v1
+    - uses: Azure/login@v1
       with:
         creds: ${{ secrets.AZURE_KUBERNETES }}
-      - uses: actions/checkout@v2
-      - run: az aks get-credentials --name RevFlixKubernetes --resource-group revflix_p2_rg --admin
-      - run: kubectl apply --filename ./.kubernetes/mvc
-      - run: kubectl rollout restart --filename ./.kubernetes/mvc/k8s_deployment.yaml
-      - run: az logout
+    - uses: actions/checkout@v2
+    - run: az aks get-credentials --name RevFlixKubernetes --resource-group revflix_p2_rg --admin
+    - run: kubectl apply --filename ./.kubernetes/mvc
+    - run: kubectl rollout restart --filename ./.kubernetes/mvc/k8s_deployment.yaml
+    - run: az logout
 
   deploy_storing:
     needs: package_storing
     runs-on: ubuntu-20.04
     steps:
-      - uses: Azure/login@v1
+    - uses: Azure/login@v1
       with:
         creds: ${{ secrets.AZURE_KUBERNETES }}
-      - uses: actions/checkout@v2
-      - run: az aks get-credentials --name RevFlixKubernetes --resource-group revflix_p2_rg --admin
-      - run: kubectl apply --filename ./.kubernetes/storing
-      - run: kubectl rollout restart --filename ./.kubernetes/storing/k8s_deployment.yaml
-      - run: az logout
+    - uses: actions/checkout@v2
+    - run: az aks get-credentials --name RevFlixKubernetes --resource-group revflix_p2_rg --admin
+    - run: kubectl apply --filename ./.kubernetes/storing
+    - run: kubectl rollout restart --filename ./.kubernetes/storing/k8s_deployment.yaml
+    - run: az logout
 
   deploy_service:
     needs: package_service
     runs-on: ubuntu-20.04
     steps:
-      - uses: Azure/login@v1
+    - uses: Azure/login@v1
       with:
         creds: ${{ secrets.AZURE_KUBERNETES }}
-      - uses: actions/checkout@v2
-      - run: az aks get-credentials --name RevFlixKubernetes --resource-group revflix_p2_rg --admin
-      - run: kubectl apply --filename ./.kubernetes/service
-      - run: kubectl rollout restart --filename ./.kubernetes/service/k8s_deployment.yaml
-      - run: az logout
+    - uses: actions/checkout@v2
+    - run: az aks get-credentials --name RevFlixKubernetes --resource-group revflix_p2_rg --admin
+    - run: kubectl apply --filename ./.kubernetes/service
+    - run: kubectl rollout restart --filename ./.kubernetes/service/k8s_deployment.yaml
+    - run: az logout
 
   deploy_angular:
     needs: package_angular
     runs-on: ubuntu-20.04
     steps:
-      - uses: Azure/login@v1
+    - uses: Azure/login@v1
       with:
         creds: ${{ secrets.AZURE_KUBERNETES }}
-      - uses: actions/checkout@v2
-      - run: az aks get-credentials --name RevFlixKubernetes --resource-group revflix_p2_rg --admin
-      - run: kubectl apply --filename ./.kubernetes/angular
-      - run: kubectl rollout restart --filename ./.kubernetes/angular/k8s_deployment.yaml
-      - run: az logout
+    - uses: actions/checkout@v2
+    - run: az aks get-credentials --name RevFlixKubernetes --resource-group revflix_p2_rg --admin
+    - run: kubectl apply --filename ./.kubernetes/angular
+    - run: kubectl rollout restart --filename ./.kubernetes/angular/k8s_deployment.yaml
+    - run: az logout
 
 name: revflix-pipeline
 
