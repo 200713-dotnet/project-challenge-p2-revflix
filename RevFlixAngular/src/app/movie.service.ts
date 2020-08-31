@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Movie } from './movie';
+import { Details } from './details';
+import { Locations } from './locations';
 import { MOVIES } from './mock-movies';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -35,6 +37,21 @@ export class MovieService {
     return of(MOVIES.find(movie => movie.imdb_id === id));
   }
 
+  getDetails(imdb_id: string): Observable<Details> {
+    this.moviesUrl = this.hostWebApi + 'imdbs/1/' + imdb_id;
+    return this.http.get<Details>(this.moviesUrl)
+    .pipe(
+        catchError(this.handleError<Details>('getDetails', ))
+    )  
+  }
+
+  getLocations(title: string): Observable<Locations[]> {
+    this.moviesUrl = this.hostWebApi + 'u/imdb/' + title;
+    return this.http.get<Locations[]>(this.moviesUrl)
+    .pipe(
+        catchError(this.handleError<Locations[]>('getLocations', ))
+    )  
+  }
     /**
    * Handle Http operation that failed.
    * Let the app continue.
@@ -46,9 +63,6 @@ export class MovieService {
 
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
-
-      // TODO: better job of transforming error for user consumption
-      // this.log(`${operation} failed: ${error.message}`);
 
       // Let the app keep running by returning an empty result.
       return of(result as T);

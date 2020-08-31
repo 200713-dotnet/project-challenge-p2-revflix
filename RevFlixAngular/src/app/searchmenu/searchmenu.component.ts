@@ -8,6 +8,7 @@ import { QUICKSEARCH } from '../list-quicksearch';
 })
 export class SearchmenuComponent implements OnInit {
 
+  searchedtitle: string;
   searches = QUICKSEARCH;
 
   constructor() { }

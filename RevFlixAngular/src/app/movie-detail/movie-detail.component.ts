@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { MovieService } from '../movie.service';
+import { Details } from '../details';
 
 @Component({
   selector: 'app-movie-detail',
@@ -13,7 +14,10 @@ import { MovieService } from '../movie.service';
 export class MovieDetailComponent implements OnInit {
   
   @Input() movie: Movie;
+  details: Details;
   
+  // yturl = "https://www.youtube.com/watch?v=" + this.details.youtube_Trailer_Key;
+
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService,
@@ -21,13 +25,19 @@ export class MovieDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getMovie();
+    this.getDetails();
   }
   
   getMovie(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.movieService.getMovie(id)
       .subscribe(movie => this.movie = movie);
+  }
+
+  getDetails(): void {
+    const imdb_id = this.route.snapshot.paramMap.get('id');
+    this.movieService.getDetails(imdb_id)
+      .subscribe(details => this.details = details);
   }
   
   goBack(): void {
