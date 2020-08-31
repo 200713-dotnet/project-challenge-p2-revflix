@@ -13,7 +13,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class MovieService {
 
   private moviesUrl;        // URL to the desired web api
-  private hostWebApi = 'http://localhost:5002/movie/';
+  private hostWebApi = 'https://revflixservice.azurewebsites.net';
+  //private hostWebApi = 'http://localhost:5002/movie/';
 
   constructor(private http: HttpClient) { }
 
