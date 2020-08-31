@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Text.Json;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
@@ -25,13 +20,14 @@ namespace RevFlix.Client.Controllers
             var request = new RestRequest(Method.GET);
             IRestResponse response = client.Execute(request);
 
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-                IgnoreReadOnlyProperties = true
-            };
+            // var options = new JsonSerializerOptions
+            // {
+            //     PropertyNameCaseInsensitive = true,
+            //     IgnoreReadOnlyProperties = true
+            // };
 
-            List<MovieIntModel> mvList = new List<MovieIntModel>();
+            // List<MovieIntModel> mvList = new List<MovieIntModel>();
+            var mvList = new List<MovieIntModel>();
             mvList = JsonConvert.DeserializeObject<List<MovieIntModel>>(response.Content);
 
             return View(mvList);
@@ -46,14 +42,15 @@ namespace RevFlix.Client.Controllers
 
             try
             {
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true,
-                    IgnoreReadOnlyProperties = true
-                };
+                // var options = new JsonSerializerOptions
+                // {
+                //     PropertyNameCaseInsensitive = true,
+                //     IgnoreReadOnlyProperties = true
+                // };
 
-                List<MovieIntModel> mvList = new List<MovieIntModel>();
-                
+                // List<MovieIntModel> mvList = new List<MovieIntModel>();
+                var mvList = new List<MovieIntModel>();
+
                 try
                 {
                   mvList = JsonConvert.DeserializeObject<List<MovieIntModel>>(response.Content);
@@ -82,16 +79,18 @@ namespace RevFlix.Client.Controllers
 
             try
             {
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true,
-                    IgnoreReadOnlyProperties = true
-                };
+                // var options = new JsonSerializerOptions
+                // {
+                //     PropertyNameCaseInsensitive = true,
+                //     IgnoreReadOnlyProperties = true
+                // };
 
-                DetailsViewModel mvList = new DetailsViewModel();
+                // DetailsViewModel mvList = new DetailsViewModel();
+                var mvList = new DetailsViewModel();
                 mvList = JsonConvert.DeserializeObject<DetailsViewModel>(response.Content);
 
-                List<SrcViewModel> srcList = new List<SrcViewModel>();
+                // List<SrcViewModel> srcList = new List<SrcViewModel>();
+                var srcList = new List<SrcViewModel>();
                 // wrap this in try-catch so we can still return the correct View even if deserializer throws an exception
                 // null fields should be skipped over in the view
                 try

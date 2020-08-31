@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace RevFlix.Client.Models
 {
     public class SrcViewModel

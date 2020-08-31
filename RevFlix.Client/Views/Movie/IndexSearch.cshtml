@@ -11,7 +11,7 @@
 			<thead>
         <caption></caption>
         <th></th>
-				<tr align="center">
+				<tr style="text-align: center; vertical-align: middle;">
 					<td><strong>Title</strong></td>
 					<td><strong>Year Released</strong></td>
 					<td><strong>IMDB ID</strong></td>
@@ -26,8 +26,8 @@
             <a asp-controller="Movie" asp-action="DisplayDetails"
                 asp-route-Imdb_id="@movie.Imdb_id">@movie.Title</a>
           </td>
-          <td align="center" value="@movie.Year">@movie.Year</td>
-          <td align="center" value="@movie.Imdb_id">@movie.Imdb_id</td>
+          <td style="text-align: center; vertical-align: middle;" value="@movie.Year">@movie.Year</td>
+          <td style="text-align: center; vertical-align: middle;" value="@movie.Imdb_id">@movie.Imdb_id</td>
           <td>
             <div class="AddtoList">
             <p class="button">
