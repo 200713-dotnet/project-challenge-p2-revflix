@@ -1,6 +1,5 @@
-FROM node:12.16.1-alpine as build
+FROM node:current as build
 WORKDIR /workspace
-EXPOSE 4200
 COPY . .
 RUN npm ci
 RUN npm run build

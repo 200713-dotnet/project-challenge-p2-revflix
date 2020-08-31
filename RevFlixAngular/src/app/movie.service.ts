@@ -15,6 +15,7 @@ export class MovieService {
   private moviesUrl;        // URL to the desired web api
   private hostWebApi = 'https://revflixservice.azurewebsites.net/movie/';
   // private hostWebApi = 'http://localhost:5002/movie/';
+  // private hostWebApi = 'http://52.177.161.233/movie/';
 
   constructor(private http: HttpClient) { }
 

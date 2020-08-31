@@ -104,6 +104,9 @@ namespace RevFlix.Service.Controllers
       KeyVaultSecret keysecret = Client.GetSecret("revflix-p2-imdbkey");
       ImdbHost = hostsecret.Value;
       ImdbKey = keysecret.Value;
+      // KeyVaultSecret hostsecret = Client.GetSecret("revflix-p2-imdbhost-kube");
+      // ImdbHost = hostsecret.Value;
+
     }
 
     public IRestResponse RestGet(string endp, string stringp, ref string message)

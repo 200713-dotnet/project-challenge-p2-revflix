@@ -74,6 +74,8 @@ namespace RevFlix.Service.Controllers
       KeyVaultSecret keysecret = Client.GetSecret("revflix-p2-utellykey");
       UtellyHost = hostsecret.Value;
       UtellyKey = keysecret.Value;
+      // KeyVaultSecret hostsecret = Client.GetSecret("revflix-p2-imdbhost-kube");
+      // ImdbHost = hostsecret.Value;
 
     }
 
